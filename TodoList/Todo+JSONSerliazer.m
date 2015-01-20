@@ -19,16 +19,17 @@
     dateFormatter.dateFormat = TODO_DATE_FORMAT;
     
     Todo *todo = [[Todo alloc] init];
-    for (id key in JSON)
+    for (id key in JSON){
+        NSLog(@"key: %@", key);
         if([todo respondsToSelector:NSSelectorFromString(key)]){
+            NSLog(@"respond to selector!");
             if([key isEqualToString:@"dueDate"]){
                 todo.dueDate = [dateFormatter dateFromString:JSON[key]];
             }
-            else if ([key isEqualToString:@"done"])
-                todo.done = [key boolValue];
             else
                 [todo setValue:JSON[key] forKey:key];
         }
+    }
     return todo;
 }
 
